@@ -1340,7 +1340,6 @@ Private.load_prototype = {
       type = "tristate",
       width = WeakAuras.normalWidth,
       init = "arg",
-      optional = true,
       events = {"ENCOUNTER_START", "ENCOUNTER_END"}
     },
     {
@@ -1349,7 +1348,6 @@ Private.load_prototype = {
       type = "tristate",
       init = WeakAuras.IsRetail() and "arg" or nil,
       width = WeakAuras.normalWidth,
-      optional = true,
       enable = WeakAuras.IsRetail(),
       hidden = not WeakAuras.IsRetail(),
       events = {"PLAYER_FLAGS_CHANGED"}
@@ -1876,7 +1874,6 @@ Private.load_prototype = {
       init = "arg",
       values = "group_types",
       events = {"GROUP_ROSTER_UPDATE"},
-      optional = true,
     },
     {
       name = "groupSize",
@@ -1888,7 +1885,6 @@ Private.load_prototype = {
         operator = "and",
         limit = 2
       },
-      optional = true,
     },
     {
       name = "group_leader",
@@ -1899,7 +1895,6 @@ Private.load_prototype = {
       width = WeakAuras.doubleWidth,
       values = "group_member_types",
       test = "Private.ExecEnv.CheckGroupMemberType(%s, group_leader)",
-      optional = true,
     },
     {
       name ="locationTitle",
@@ -1916,35 +1911,30 @@ Private.load_prototype = {
       test = "checker:Check(zone)",
       events = {"ZONE_CHANGED", "ZONE_CHANGED_INDOORS", "ZONE_CHANGED_NEW_AREA", "VEHICLE_UPDATE"},
       desc = L["Supports multiple entries, separated by commas. Escape ',' with \\. Prefix with '-' for negation."],
-      optional = true,
     },
     {
       name = "zoneId",
       enable = false,
       hidden = true,
       init = "arg",
-      optional = true,
     },
     {
       name = "zonegroupId",
       enable = false,
       hidden = true,
       init = "arg",
-      optional = true,
     },
     {
       name = "instanceId",
       enable = false,
       hidden = true,
       init = "arg",
-      optional = true,
     },
     {
       name = "minimapZoneText",
       enable = false,
       hidden = true,
       init = "arg",
-      optional = true,
     },
     {
       name = "zoneIds",
@@ -1955,7 +1945,6 @@ Private.load_prototype = {
       desc = get_zoneId_list,
       preamble = "local zoneChecker = Private.ExecEnv.ParseZoneCheck(%q)",
       test = "zoneChecker:Check(zoneId, zonegroupId, instanceId, minimapZoneText)",
-      optional = true,
     },
     {
       name = "encounterid",
@@ -1966,7 +1955,6 @@ Private.load_prototype = {
       desc = Private.get_encounters_list,
       test = "WeakAuras.CheckNumericIds(%q, encounterid)",
       events = {"ENCOUNTER_START", "ENCOUNTER_END"},
-      optional = true,
     },
     {
       name = "size",
@@ -1976,7 +1964,6 @@ Private.load_prototype = {
       sorted = true,
       init = "arg",
       events = {"ZONE_CHANGED", "ZONE_CHANGED_INDOORS", "ZONE_CHANGED_NEW_AREA", "WA_DELAYED_PLAYER_ENTERING_WORLD"},
-      optional = true,
     },
     {
       name = "difficulty",
@@ -1987,7 +1974,6 @@ Private.load_prototype = {
       enable = not WeakAuras.IsClassicEra(),
       hidden = WeakAuras.IsClassicEra(),
       events = {"PLAYER_DIFFICULTY_CHANGED", "ZONE_CHANGED", "ZONE_CHANGED_INDOORS", "ZONE_CHANGED_NEW_AREA", "WA_DELAYED_PLAYER_ENTERING_WORLD"},
-      optional = true,
     },
     {
       name = "instance_type",
@@ -1999,7 +1985,6 @@ Private.load_prototype = {
       enable = not WeakAuras.IsClassicEra(),
       hidden = WeakAuras.IsClassicEra(),
       events = {"PLAYER_DIFFICULTY_CHANGED", "ZONE_CHANGED", "ZONE_CHANGED_INDOORS", "ZONE_CHANGED_NEW_AREA", "WA_DELAYED_PLAYER_ENTERING_WORLD"},
-      optional = true,
     },
     {
       name = "affixes",
@@ -2011,7 +1996,6 @@ Private.load_prototype = {
       enable = WeakAuras.IsRetail(),
       hidden = not WeakAuras.IsRetail(),
       events = {"CHALLENGE_MODE_START", "CHALLENGE_MODE_COMPLETED"},
-      optional = true,
     },
     {
       name ="equipmentTitle",
