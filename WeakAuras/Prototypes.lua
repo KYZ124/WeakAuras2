@@ -1340,6 +1340,7 @@ Private.load_prototype = {
       type = "tristate",
       width = WeakAuras.normalWidth,
       init = "arg",
+      optional = true,
       events = {"ENCOUNTER_START", "ENCOUNTER_END"}
     },
     {
