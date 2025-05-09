@@ -1,4 +1,4 @@
-## Interface: 110100
+## Interface: 110105
 ## Title: WeakAuras
 ## Author: The WeakAuras Team
 ## Version: @project-version@
@@ -40,7 +40,6 @@ DefaultOptions.lua
 # Core files
 SubscribableObject.lua
 Features.lua
-Atlas_Retail.lua
 Types_Retail.lua
 Types.lua
 Prototypes.lua

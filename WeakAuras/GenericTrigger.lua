@@ -1246,7 +1246,7 @@ end
 
 function GenericTrigger.UnloadDisplays(toUnload)
   for id in pairs(toUnload) do
-    loaded_auras[id] = false;
+    loaded_auras[id] = nil
     for eventname, events in pairs(loaded_events) do
       if(eventname == "COMBAT_LOG_EVENT_UNFILTERED") then
         for subeventname, subevents in pairs(events) do
@@ -1283,7 +1283,8 @@ genericTriggerRegisteredEvents["NAME_PLATE_UNIT_REMOVED"] = true;
 frame:SetScript("OnEvent", HandleEvent);
 
 function GenericTrigger.Delete(id)
-  GenericTrigger.UnloadDisplays({[id] = true});
+  events[id] = nil
+  watched_trigger_events[id] = nil
 end
 
 function GenericTrigger.Rename(oldid, newid)
@@ -1657,7 +1658,7 @@ function GenericTrigger.Add(data, region)
             triggerFuncStr = ConstructFunction(prototype, trigger);
 
             statesParameter = prototype.statesParameter;
-            triggerFunc = Private.LoadFunction(triggerFuncStr);
+            triggerFunc = Private.LoadFunction(triggerFuncStr, id);
 
             durationFunc = prototype.durationFunc;
             nameFunc = prototype.nameFunc;
@@ -1734,44 +1735,44 @@ function GenericTrigger.Add(data, region)
             end
           end
         else -- CUSTOM
-          triggerFunc = WeakAuras.LoadFunction("return "..(trigger.custom or ""));
+          triggerFunc = WeakAuras.LoadFunction("return "..(trigger.custom or ""), data.id);
           if (trigger.custom_type == "stateupdate") then
-            tsuConditionVariables = WeakAuras.LoadFunction("return function() return \n" .. (trigger.customVariables or "") .. "\n end");
+            tsuConditionVariables = WeakAuras.LoadFunction("return function() return \n" .. (trigger.customVariables or "") .. "\n end", data.id);
             if not tsuConditionVariables then
               tsuConditionVariables = function() end
             end
           end
 
           if(trigger.custom_type == "status" or trigger.custom_type == "event" and trigger.custom_hide == "custom") then
-            untriggerFunc = WeakAuras.LoadFunction("return "..(untrigger.custom or ""));
+            untriggerFunc = WeakAuras.LoadFunction("return "..(untrigger.custom or ""), data.id);
             if (not untriggerFunc) then
               untriggerFunc = trueFunction;
             end
           end
 
           if(trigger.custom_type ~= "stateupdate" and trigger.customDuration and trigger.customDuration ~= "") then
-            durationFunc = WeakAuras.LoadFunction("return "..trigger.customDuration);
+            durationFunc = WeakAuras.LoadFunction("return "..trigger.customDuration, data.id);
           end
           if(trigger.custom_type ~= "stateupdate") then
             overlayFuncs = {};
             for i = 1, 7 do
               local property = "customOverlay" .. i;
               if (trigger[property] and trigger[property] ~= "") then
-                overlayFuncs[i] = WeakAuras.LoadFunction("return ".. trigger[property]);
+                overlayFuncs[i] = WeakAuras.LoadFunction("return ".. trigger[property], data.id);
               end
             end
           end
           if(trigger.custom_type ~= "stateupdate" and trigger.customName and trigger.customName ~= "") then
-            nameFunc = WeakAuras.LoadFunction("return "..trigger.customName);
+            nameFunc = WeakAuras.LoadFunction("return "..trigger.customName, data.id);
           end
           if(trigger.custom_type ~= "stateupdate" and trigger.customIcon and trigger.customIcon ~= "") then
-            iconFunc = WeakAuras.LoadFunction("return "..trigger.customIcon);
+            iconFunc = WeakAuras.LoadFunction("return "..trigger.customIcon, data.id);
           end
           if(trigger.custom_type ~= "stateupdate" and trigger.customTexture and trigger.customTexture ~= "") then
-            textureFunc = WeakAuras.LoadFunction("return "..trigger.customTexture);
+            textureFunc = WeakAuras.LoadFunction("return "..trigger.customTexture, data.id);
           end
           if(trigger.custom_type ~= "stateupdate" and trigger.customStacks and trigger.customStacks ~= "") then
-            stacksFunc = WeakAuras.LoadFunction("return "..trigger.customStacks);
+            stacksFunc = WeakAuras.LoadFunction("return "..trigger.customStacks, data.id);
           end
 
           if((trigger.custom_type == "status" or trigger.custom_type == "stateupdate") and trigger.check == "update") then
@@ -4594,10 +4595,10 @@ function GenericTrigger.SetToolTip(trigger, state)
       return true
     elseif (state.unit and state.unitAuraInstanceID and state.unitAuraFilter) then
       if state.unitAuraFilter == "HELPFUL" then
-        GameTooltip:SetUnitBuffByAuraInstanceID(state.unit, state.auraInstanceID, state.unitAuraFilter)
+        GameTooltip:SetUnitBuffByAuraInstanceID(state.unit, state.unitAuraInstanceID, state.unitAuraFilter)
         return true
       elseif state.unitAuraFilter == "HARMFUL" then
-        GameTooltip:SetUnitDebuffByAuraInstanceID(state.unit, state.auraInstanceID, state.unitAuraFilter)
+        GameTooltip:SetUnitDebuffByAuraInstanceID(state.unit, state.unitAuraInstanceID, state.unitAuraFilter)
         return true
       end
     end
