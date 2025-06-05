@@ -2689,7 +2689,7 @@ do
       useExact = useExact and true or false
       followoverride = followoverride and true or false
 
-      if ignoreRunes and WeakAuras.IsCataOrRetail() then
+      if ignoreRunes and WeakAuras.IsCataOrMistsOrRetail() then
         for i = 1, 6 do
           WeakAuras.WatchRuneCooldown(i)
         end
@@ -3746,7 +3746,7 @@ function WeakAuras.WatchUnitChange(unit)
         end
       end
     end
-    if WeakAuras.IsCataOrRetail() then
+    if WeakAuras.IsCataOrMistsOrRetail() then
       function roleUpdate(unit, eventsToSend)
         local oldRole = watchUnitChange.unitRoles[unit]
         local newRole = UnitGroupRolesAssigned(unit)
@@ -4358,6 +4358,31 @@ do
   end
 end
 
+-- combat assist next cast
+if C_AssistedCombat and C_AssistedCombat.GetNextCastSpell then
+  local assistedCombatFrame
+
+  local function assistedCombatUpdate(self, elapsed)
+    Private.StartProfileSystem("generictrigger assisted combat next cast")
+    local nextCastSpell = C_AssistedCombat.GetNextCastSpell()
+    if nextCastSpell ~= assistedCombatFrame.lastSpell then
+      assistedCombatFrame.lastSpell = nextCastSpell
+      Private.ScanEvents("WA_ASSISTED_COMBAT_NEXT_CAST", nextCastSpell)
+    end
+    Private.StopProfileSystem("generictrigger assisted combat next cast")
+  end
+
+  ---@private
+  function WeakAuras.WatchForAssistedCombatNextCast()
+    if not assistedCombatFrame then
+      assistedCombatFrame = CreateFrame("Frame")
+      Private.frames["Assisted Combat Next Cast Frame"] = assistedCombatFrame
+      assistedCombatFrame.lastSpell = C_AssistedCombat.GetNextCastSpell()
+    end
+    assistedCombatFrame:SetScript("OnUpdate", assistedCombatUpdate)
+  end
+end
+
 -- Item Count
 local itemCountWatchFrame
 ---@private
@@ -4391,7 +4416,7 @@ end
 -- LibSpecWrapper
 -- We always register, because it's probably not that often called, and ScanEvents checks
 -- early if anyone wants the event
-if WeakAuras.IsCataOrRetail() then
+if WeakAuras.IsCataOrMistsOrRetail() then
   Private.LibSpecWrapper.Register(function(unit)
     Private.ScanEvents("UNIT_SPEC_CHANGED_" .. unit, unit)
   end)
@@ -5077,8 +5102,8 @@ do
     end
   elseif class == "MONK" then
     function WeakAuras.CalculatedGcdDuration()
-      local spec = GetSpecialization()
-      local primaryStat = select(6, GetSpecializationInfo(spec))
+      local spec = Private.ExecEnv.GetSpecialization()
+      local primaryStat = select(6, Private.ExecEnv.GetSpecializationInfo(spec))
       if primaryStat == LE_UNIT_STAT_AGILITY then
         return 1
       end

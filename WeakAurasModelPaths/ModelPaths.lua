@@ -4160,6 +4160,17 @@ WeakAuras.ModelPaths = {
    {
     children = {
      {
+      fileId = "5905028",
+      text = "bearmountblizzard2.m2",
+      value = "bearmountblizzard2.m2",
+     },
+    },
+    text = "bearmountblizzard2",
+    value = "bearmountblizzard2",
+   },
+   {
+    children = {
+     {
       fileId = "5900847",
       text = "bearmountutility.m2",
       value = "bearmountutility.m2",
@@ -6195,17 +6206,6 @@ WeakAuras.ModelPaths = {
     },
     text = "chimeraoutland",
     value = "chimeraoutland",
-   },
-   {
-    children = {
-     {
-      fileId = "5905028",
-      text = "chinabearmount.m2",
-      value = "chinabearmount.m2",
-     },
-    },
-    text = "chinabearmount",
-    value = "chinabearmount",
    },
    {
     children = {
@@ -33854,6 +33854,17 @@ WeakAuras.ModelPaths = {
     },
     text = "suramarmount",
     value = "suramarmount",
+   },
+   {
+    children = {
+     {
+      fileId = "4235616",
+      text = "surveybotpet.m2",
+      value = "surveybotpet.m2",
+     },
+    },
+    text = "surveybotpet",
+    value = "surveybotpet",
    },
    {
     children = {
@@ -313481,17 +313492,6 @@ WeakAuras.ModelPaths = {
      {
       children = {
        {
-        fileId = "4235616",
-        text = "4235616.m2",
-        value = "4235616.m2",
-       },
-      },
-      text = "unk_exp08_4235616",
-      value = "unk_exp08_4235616",
-     },
-     {
-      children = {
-       {
         fileId = "5099961",
         text = "5099961.m2",
         value = "5099961.m2",
@@ -316826,17 +316826,6 @@ WeakAuras.ModelPaths = {
      {
       children = {
        {
-        fileId = "1782602",
-        text = "1782602.m2",
-        value = "1782602.m2",
-       },
-      },
-      text = "unk_exp06_1782602",
-      value = "unk_exp06_1782602",
-     },
-     {
-      children = {
-       {
         fileId = "5523140",
         text = "5523140.m2",
         value = "5523140.m2",
@@ -316855,17 +316844,6 @@ WeakAuras.ModelPaths = {
       },
       text = "unk_exp10_5917786",
       value = "unk_exp10_5917786",
-     },
-     {
-      children = {
-       {
-        fileId = "5923704",
-        text = "5923704.m2",
-        value = "5923704.m2",
-       },
-      },
-      text = "unk_exp10_5923704",
-      value = "unk_exp10_5923704",
      },
      {
       children = {
@@ -317057,17 +317035,6 @@ WeakAuras.ModelPaths = {
      {
       children = {
        {
-        fileId = "6008448",
-        text = "6008448.m2",
-        value = "6008448.m2",
-       },
-      },
-      text = "unk_exp10_6008448",
-      value = "unk_exp10_6008448",
-     },
-     {
-      children = {
-       {
         fileId = "6020252",
         text = "6020252.m2",
         value = "6020252.m2",
@@ -317130,50 +317097,6 @@ WeakAuras.ModelPaths = {
       },
       text = "unk_exp10_6056052",
       value = "unk_exp10_6056052",
-     },
-     {
-      children = {
-       {
-        fileId = "6079354",
-        text = "6079354.m2",
-        value = "6079354.m2",
-       },
-      },
-      text = "unk_exp10_6079354",
-      value = "unk_exp10_6079354",
-     },
-     {
-      children = {
-       {
-        fileId = "6079355",
-        text = "6079355.m2",
-        value = "6079355.m2",
-       },
-      },
-      text = "unk_exp10_6079355",
-      value = "unk_exp10_6079355",
-     },
-     {
-      children = {
-       {
-        fileId = "6079356",
-        text = "6079356.m2",
-        value = "6079356.m2",
-       },
-      },
-      text = "unk_exp10_6079356",
-      value = "unk_exp10_6079356",
-     },
-     {
-      children = {
-       {
-        fileId = "6079357",
-        text = "6079357.m2",
-        value = "6079357.m2",
-       },
-      },
-      text = "unk_exp10_6079357",
-      value = "unk_exp10_6079357",
      },
      {
       children = {
@@ -317537,17 +317460,6 @@ WeakAuras.ModelPaths = {
       },
       text = "unk_exp10_6321356",
       value = "unk_exp10_6321356",
-     },
-     {
-      children = {
-       {
-        fileId = "6322768",
-        text = "6322768.m2",
-        value = "6322768.m2",
-       },
-      },
-      text = "unk_exp10_6322768",
-      value = "unk_exp10_6322768",
      },
      {
       children = {
@@ -317922,6 +317834,100 @@ WeakAuras.ModelPaths = {
       },
       text = "unk_exp10_6404378",
       value = "unk_exp10_6404378",
+     },
+    },
+    text = "spells",
+    value = "spells",
+   },
+   {
+    children = {
+     {
+      children = {
+       {
+        fileId = "1782602",
+        text = "1782602.m2",
+        value = "1782602.m2",
+       },
+      },
+      text = "unk_exp06_1782602",
+      value = "unk_exp06_1782602",
+     },
+     {
+      children = {
+       {
+        fileId = "5923704",
+        text = "5923704.m2",
+        value = "5923704.m2",
+       },
+      },
+      text = "unk_exp10_5923704",
+      value = "unk_exp10_5923704",
+     },
+     {
+      children = {
+       {
+        fileId = "6008448",
+        text = "6008448.m2",
+        value = "6008448.m2",
+       },
+      },
+      text = "unk_exp10_6008448",
+      value = "unk_exp10_6008448",
+     },
+     {
+      children = {
+       {
+        fileId = "6079354",
+        text = "6079354.m2",
+        value = "6079354.m2",
+       },
+      },
+      text = "unk_exp10_6079354",
+      value = "unk_exp10_6079354",
+     },
+     {
+      children = {
+       {
+        fileId = "6079355",
+        text = "6079355.m2",
+        value = "6079355.m2",
+       },
+      },
+      text = "unk_exp10_6079355",
+      value = "unk_exp10_6079355",
+     },
+     {
+      children = {
+       {
+        fileId = "6079356",
+        text = "6079356.m2",
+        value = "6079356.m2",
+       },
+      },
+      text = "unk_exp10_6079356",
+      value = "unk_exp10_6079356",
+     },
+     {
+      children = {
+       {
+        fileId = "6079357",
+        text = "6079357.m2",
+        value = "6079357.m2",
+       },
+      },
+      text = "unk_exp10_6079357",
+      value = "unk_exp10_6079357",
+     },
+     {
+      children = {
+       {
+        fileId = "6322768",
+        text = "6322768.m2",
+        value = "6322768.m2",
+       },
+      },
+      text = "unk_exp10_6322768",
+      value = "unk_exp10_6322768",
      },
      {
       children = {
