@@ -1603,7 +1603,7 @@ local function GetInstanceTypeAndSize()
     end
     return size, difficulty, instanceType, instanceId, difficultyIndex
   end
-  return "none", "none", nil, nil, nil
+  return "none", "none", nil, nil, 0
 end
 
 ---@return string instanceType
@@ -1963,7 +1963,9 @@ local function UnloadAll()
   for id in pairs(loaded) do
     local func = Private.customActionsFunctions[id] and Private.customActionsFunctions[id]["unload"]
     if func then
+      Private.ActivateAuraEnvironment(id)
       xpcall(func, Private.GetErrorHandlerId(id, "onUnload"))
+      Private.ActivateAuraEnvironment(nil)
     end
   end
   wipe(loaded);
@@ -2016,7 +2018,9 @@ function Private.LoadDisplays(toLoad, ...)
   for id in pairs(toLoad) do
     local func = Private.customActionsFunctions[id] and Private.customActionsFunctions[id]["load"]
     if func then
+      Private.ActivateAuraEnvironment(id)
       xpcall(func, Private.GetErrorHandlerId(id, "onLoad"))
+      Private.ActivateAuraEnvironment(nil)
     end
   end
 end
@@ -2025,7 +2029,9 @@ function Private.UnloadDisplays(toUnload, ...)
   for id in pairs(toUnload) do
     local func = Private.customActionsFunctions[id] and Private.customActionsFunctions[id]["unload"]
     if func then
+      Private.ActivateAuraEnvironment(id)
       xpcall(func, Private.GetErrorHandlerId(id, "onUnload"))
+      Private.ActivateAuraEnvironment(nil)
     end
   end
   for _, triggerSystem in pairs(triggerSystems) do
@@ -6491,11 +6497,11 @@ function Private.SortOrderForValues(values)
     local aValue = values[aKey]
     local bValue = values[bKey]
 
-    if aValue:sub(1, #WeakAuras.newFeatureString) == WeakAuras.newFeatureString then
+    if type(aValue) == "string" and aValue:sub(1, #WeakAuras.newFeatureString) == WeakAuras.newFeatureString then
       aValue = aValue:sub(#WeakAuras.newFeatureString + 1)
     end
 
-    if bValue:sub(1, #WeakAuras.newFeatureString) == WeakAuras.newFeatureString then
+    if type(bValue) == "string" and bValue:sub(1, #WeakAuras.newFeatureString) == WeakAuras.newFeatureString then
       bValue = bValue:sub(#WeakAuras.newFeatureString + 1)
     end
 

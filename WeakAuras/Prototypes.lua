@@ -1167,16 +1167,12 @@ end
 
 if WeakAuras.IsMists() then
   function WeakAuras.IsGlyphActive(glyphID)
-    glyphID = tostring(glyphID)
     local numSlots = NUM_GLYPH_SLOTS or 6 -- fallback if not defined
     for slot = 1, numSlots do
-        local enabled = GetGlyphSocketInfo(slot)
-        if enabled then
-          local link = GetGlyphLink(slot)
-          if link and link:match("|Hglyph:%d+:(%d+)|h") == glyphID then
-              return true
-          end
-        end
+      local enabled, _, _, _ , _, id = GetGlyphSocketInfo(slot)
+      if enabled and id == glyphID then
+        return true
+      end
     end
     return false
   end
@@ -3204,7 +3200,7 @@ Private.event_prototypes = {
       end
       AddUnitEventForEvents(result, unit, "UNIT_MAXHEALTH")
       AddUnitEventForEvents(result, unit, "UNIT_NAME_UPDATE")
-      if WeakAuras.IsRetail() then
+      if WeakAuras.IsMistsOrRetail() then
         if trigger.use_showAbsorb then
           AddUnitEventForEvents(result, unit, "UNIT_ABSORB_AMOUNT_CHANGED")
         end
@@ -3347,8 +3343,8 @@ Private.event_prototypes = {
         type = "toggle",
         test = "true",
         reloadOptions = true,
-        enable = WeakAuras.IsRetail(),
-        hidden = not WeakAuras.IsRetail(),
+        enable = WeakAuras.IsMistsOrRetail(),
+        hidden = not WeakAuras.IsMistsOrRetail(),
       },
       {
         name = "absorbMode",
@@ -3357,8 +3353,8 @@ Private.event_prototypes = {
         test = "true",
         values = "absorb_modes",
         required = true,
-        enable = function(trigger) return WeakAuras.IsRetail() and trigger.use_showAbsorb end,
-        hidden = not WeakAuras.IsRetail()
+        enable = function(trigger) return WeakAuras.IsMistsOrRetail() and trigger.use_showAbsorb end,
+        hidden = not WeakAuras.IsMistsOrRetail()
       },
       {
         name = "showHealAbsorb",
@@ -3366,8 +3362,8 @@ Private.event_prototypes = {
         type = "toggle",
         test = "true",
         reloadOptions = true,
-        enable = WeakAuras.IsRetail(),
-        hidden = not WeakAuras.IsRetail()
+        enable = WeakAuras.IsMistsOrRetail(),
+        hidden = not WeakAuras.IsMistsOrRetail()
       },
       {
         name = "absorbHealMode",
@@ -3376,8 +3372,8 @@ Private.event_prototypes = {
         test = "true",
         values = "absorb_modes",
         required = true,
-        enable = function(trigger) return WeakAuras.IsRetail() and trigger.use_showHealAbsorb end,
-        hidden = not WeakAuras.IsRetail()
+        enable = function(trigger) return WeakAuras.IsMistsOrRetail() and trigger.use_showHealAbsorb end,
+        hidden = not WeakAuras.IsMistsOrRetail()
       },
       {
         name = "absorb",
@@ -3386,8 +3382,8 @@ Private.event_prototypes = {
         init = "UnitGetTotalAbsorbs(unit)",
         store = true,
         conditionType = "number",
-        enable = function(trigger) return WeakAuras.IsRetail() and trigger.use_showAbsorb end,
-        hidden = not WeakAuras.IsRetail(),
+        enable = function(trigger) return WeakAuras.IsMistsOrRetail() and trigger.use_showAbsorb end,
+        hidden = not WeakAuras.IsMistsOrRetail(),
         multiEntry = {
           operator = "and",
           limit = 2
@@ -3401,8 +3397,8 @@ Private.event_prototypes = {
         init = "UnitGetTotalHealAbsorbs(unit)",
         store = true,
         conditionType = "number",
-        enable = function(trigger) return WeakAuras.IsRetail() and trigger.use_showHealAbsorb end,
-        hidden = not WeakAuras.IsRetail(),
+        enable = function(trigger) return WeakAuras.IsMistsOrRetail() and trigger.use_showHealAbsorb end,
+        hidden = not WeakAuras.IsMistsOrRetail(),
         multiEntry = {
           operator = "and",
           limit = 2
@@ -3655,7 +3651,7 @@ Private.event_prototypes = {
           end
         end,
         enable = function(trigger)
-          return WeakAuras.IsRetail() and trigger.use_showAbsorb;
+          return WeakAuras.IsMistsOrRetail() and trigger.use_showAbsorb;
         end
       },
       {
@@ -3678,7 +3674,7 @@ Private.event_prototypes = {
           end
         end,
         enable = function(trigger)
-          return WeakAuras.IsRetail() and trigger.use_showHealAbsorb;
+          return WeakAuras.IsMistsOrRetail() and trigger.use_showHealAbsorb;
         end
       },
       {
@@ -4259,6 +4255,7 @@ Private.event_prototypes = {
         AddUnitEventForEvents(result, unit, "UNIT_FLAGS")
       end
       AddUnitEventForEvents(result, unit, "UNIT_POWER_BAR_SHOW")
+      AddUnitEventForEvents(result, unit, "UNIT_POWER_BAR_HIDE")
       if trigger.use_inRange then
         AddUnitEventForEvents(result, unit, "UNIT_IN_RANGE_UPDATE")
       end
