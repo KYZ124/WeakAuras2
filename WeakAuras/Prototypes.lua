@@ -2880,6 +2880,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "standing",
@@ -3135,6 +3136,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         type = "header",
@@ -3171,6 +3173,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
     },
     overlayFuncs = {
@@ -3272,7 +3275,8 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
-        progressTotal = "maxhealth"
+        progressTotal = "maxhealth",
+        formatter = "BigNumber",
       },
       {
         name = "value",
@@ -3306,6 +3310,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "deficit",
@@ -3318,7 +3323,8 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
-        progressTotal = "total"
+        progressTotal = "total",
+        formatter = "BigNumber",
       },
       {
         name = "maxhealth",
@@ -3331,6 +3337,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "BigNumber",
       },
       {
         type = "header",
@@ -3813,6 +3820,12 @@ Private.event_prototypes = {
             local total = math.max(1, UnitPowerMax(unit, powerType))
           ]])
         end
+      elseif WeakAuras.IsMists() and powerType == 99 then
+        table.insert(ret, ([[
+          local power = UnitStagger(unit) or 0
+          local scaleStagger = %s
+          local total = math.max(1, UnitHealthMax(unit) * scaleStagger)
+        ]]):format(trigger.use_scaleStagger and trigger.scaleStagger or 1))
       elseif WeakAuras.IsMists() and (powerType == 14 or powerType == 7) then
         table.insert(ret, [[
           local displayMod = UnitPowerDisplayMod(powerType)
@@ -3996,6 +4009,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "deficit",
@@ -4536,7 +4550,9 @@ Private.event_prototypes = {
         hidden = "true",
         test = "true",
         store = true,
-        display = L["Source GUID"]
+        display = L["Source GUID"],
+        formatter = "guid",
+        formatterArgs = { color = "class" }
       },
       {
         name = "sourceUnit",
@@ -4673,7 +4689,9 @@ Private.event_prototypes = {
         hidden = "true",
         test = "true",
         store = true,
-        display = L["Destination GUID"]
+        display = L["Destination GUID"],
+        formatter = "guid",
+        formatterArgs = { color = "class" }
       },
       {
         name = "destUnit",
@@ -6978,8 +6996,8 @@ Private.event_prototypes = {
                 end
               ]]):format(tier, column))
             elseif WeakAuras.IsMists() then
-              local tier = index and ceil(index / MAX_NUM_TALENTS)
-              local column = index and ((index - 1) % MAX_NUM_TALENTS + 1)
+              local tier = index and math.ceil(index / 3)
+              local column = index and (index - 1) % 3 + 1
               table.insert(ret, ([[
                 tier = %s
                 column = %s
@@ -8224,6 +8242,8 @@ Private.event_prototypes = {
         store = true,
         hidden = true,
         test = "true",
+        formatter = "guid",
+        formatterArgs = { color = "class" }
       },
       {
         name = "cloneId",
@@ -9339,6 +9359,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "rawthreatpct",
@@ -10409,6 +10430,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "hitrating",
@@ -10437,6 +10459,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "hasterating",
@@ -10463,6 +10486,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "meleehastepercent",
@@ -10477,6 +10501,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "expertiserating",
@@ -10519,6 +10544,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "masteryrating",
@@ -10547,6 +10573,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "versatilityrating",
@@ -10575,6 +10602,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "attackpower",
@@ -10634,6 +10662,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "movespeedrating",
@@ -10667,6 +10696,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "runspeedpercent",
@@ -10679,6 +10709,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "avoidancerating",
@@ -10707,6 +10738,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         type = "header",
@@ -10738,6 +10770,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "parryrating",
@@ -10764,6 +10797,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "blockpercent",
@@ -10776,6 +10810,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "blocktargetpercent",
@@ -10790,6 +10825,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "blockvalue",
@@ -10816,6 +10852,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "staggertargetpercent",
@@ -10830,6 +10867,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "armorrating",
@@ -10856,6 +10894,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "armortargetpercent",
@@ -10870,6 +10909,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         name = "resiliencerating",
@@ -10898,6 +10938,7 @@ Private.event_prototypes = {
           operator = "and",
           limit = 2
         },
+        formatter = "Number",
       },
       {
         type = "header",
@@ -11477,7 +11518,9 @@ Private.event_prototypes = {
         type = "number",
         init = "min",
         store = true,
-        test = "true"
+        test = "true",
+        conditionType = "number",
+        operator_types = "without_equal",
       },
       {
         hidden = true,
@@ -11486,7 +11529,9 @@ Private.event_prototypes = {
         type = "number",
         init = "max",
         store = true,
-        test = "true"
+        test = "true",
+        conditionType = "number",
+        operator_types = "without_equal",
       },
       {
         name = "range",
@@ -11498,6 +11543,7 @@ Private.event_prototypes = {
         conditionTest = function(state, needle, needle2)
           return state and state.show and WeakAuras.CheckRange(state.unit, needle, needle2);
         end,
+        noProgressSource = true
       },
       {
         hidden = true,
@@ -11543,6 +11589,7 @@ Private.event_prototypes = {
         display = Private.coin_icons.gold .. L["Gold"],
         store = true,
         conditionType = "number",
+        formatter = "BigNumber"
       },
       {
         name = "silver",
