@@ -32,10 +32,12 @@ globals = {
 	"_G",
 	"bit",
 	"Constants",
+	"OKAY",
 
 	-- misc custom
 	"AceGUIWeakAurasMultiLineEditBoxInsertLink",
 	"AceGUIWeakAurasMultiLineEditBoxWithEnterInsertLink",
+	"AceGUIWeakAurasInputWithIndentationInsertLink",
 	"AceGUIWidgetLSMlists",
 	"CUSTOM_CLASS_COLORS",
 	"LibStub",
@@ -150,6 +152,7 @@ globals = {
 	-- FrameXML globals
 	"ChatFontNormal",
 	"GameFontNormal",
+	"GameFontNormalLarge",
 	"GameFontNormalHuge",
 	"GameFontNormalSmall",
 	"GameFontNormalSmall2",
@@ -4313,6 +4316,11 @@ globals = {
 	"TargetofTargetHealthCheck",
 	"TaxiNodeOnButtonEnter",
 	"TextEmoteSort",
+	"TextToSpeech_GetSelectedVoice",
+	"TextToSpeech_Speak",
+	"VOICE_WINDOW_ID",
+	"ChatConfigFrame",
+	"ChatConfigFrameChatTabManager",
 	"ToggleAchievementFrame",
 	"ToggleAllBags",
 	"ToggleBackpack",
